@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Magic Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+<!-- bootstrap -->
+
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{/bootstrap/css/bootstrap-responsive.min.css}">
+<link rel="stylesheet" th:href="@{/themes/css/bootstrappage.css}">
+
+<!-- global styles -->
+<link rel="stylesheet" th:href="@{/themes/css/flexslider.css}">
+<link rel="stylesheet" th:href="@{/themes/css/main.css}">
+
+<!-- scripts -->
+<script th:src="@{/themes/js/jquery-1.7.2.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/themes/js/superfish.js}"></script>
+<script th:src="@{/themes/js/jquery.scrolltotop.js}"></script>
+<script th:src="@{/js/magicStore.js}"></script>
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+	<div id="wrapper" class="container">
+	<section>
+			<h4 class="title">
+				<span class="text"><strong>Minha</strong> Conta</span>
+			</h4>
+		</section>
+		<section class="main-content">
+			<div class="row">
+					<div class="span3 col">
+						<div class="block">
+							<ul class="nav nav-list">
+								<li class="nav-header">Menu</li>
+								<li><a th:href="@{/minhaConta/pedidos(idUsuario = ${session.usuarioLogado.id})}"><label>Pedidos</label></a></li>
+								<li><a th:href="@{/minhaConta/dadosPessoais(idUsuario = ${session.usuarioLogado.id})}"><label>Dados pessoais</label></a></li>
+								<li><a th:href="@{/minhaConta/endereco(idUsuario = ${session.usuarioLogado.id})}"><label>Endereço</label></a></li>
+								<li><a th:href="@{/minhaConta/cartoes(idUsuario = ${session.usuarioLogado.id})}"><label>Cartões</label></a></li>
+							</ul>
+							<br />
+						</div>
+					</div>
+					<div class="span9">
+						<div class="row-fluid">
+							<div class="span12">
+								<h4>Dados Pessoais</h4>
+								<form th:action="@{/minhaConta/dadosPessoais}" th:method="put"
+									id="formAtualiza" th:object="${usuario}">
+									<input type="hidden" name="id" th:value="${dadosUsuario.id}">
+									<label>Nome: </label>
+									<input type="text" name="nome" th:value="${dadosUsuario.nome}" required="required">
+									
+									<label>Email: </label>
+									<input type="email" name="email" th:value="${dadosUsuario.email}" required="required">
+									
+									<label>Senha: </label>
+									<input type="password" name="senha" th:value="${dadosUsuario.senha}" required="required">
+									
+									<label>CPF: </label>
+									<input type="text" name="cpf" pattern="[0-9]+$" maxlength="11" th:value="${dadosUsuario.cpf}" required="required">
+									
+									<label>RG: </label>
+									<input type="text" name="rg" pattern="[0-9]+$" maxlength="9" th:value="${dadosUsuario.rg}" required="required">
+									<button type="submit" class="btn btn-primary">Atualizar</button>
+								</form>
+							</div>
+						</div>
+
+					</div>
+			</div>
+		</section>
+		<div th:replace="fragmentos/fragmentos :: rodape"></div>
+		</div>
+</body>
+</html>

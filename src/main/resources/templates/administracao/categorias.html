@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Magic Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+<!-- bootstrap -->
+
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{/bootstrap/css/bootstrap-responsive.min.css}">
+<link rel="stylesheet" th:href="@{/themes/css/bootstrappage.css}">
+
+<!-- global styles -->
+<link rel="stylesheet" th:href="@{/themes/css/flexslider.css}">
+<link rel="stylesheet" th:href="@{/themes/css/main.css}">
+
+<!-- scripts -->
+<script th:src="@{/themes/js/jquery-1.7.2.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/themes/js/superfish.js}"></script>
+<script th:src="@{/themes/js/jquery.scrolltotop.js}"></script>
+<script th:src="@{/js/magicStore.js}"></script>
+<!--[if lt IE 9]>			
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="themes/js/respond.min.js"></script>
+		<![endif]-->
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+	<div id="wrapper" class="container">
+		<section>
+			<h4 class="title">
+				<span class="text"><strong>Área de</strong> Administração</span>
+			</h4>
+		</section>
+		<section th:if="${session.usuarioLogado}" class="main-content">
+			<div class="row">
+				<div class="span3 col">
+					<div class="block">
+						<ul class="nav nav-list">
+							<li class="nav-header">Menu</li>
+							<li><a th:href="@{/categoria/all/noproduct}"><label>Categorias</label></a></li>
+							<li><a
+								th:href="@{/produto/lista/administracao/{categoria}(categoria = 1)}"><label>Produtos</label></a></li>
+						</ul>
+						<br />
+					</div>
+				</div>
+				<div class="span9 col">
+					<div th:if="${msg} and ${msg} == 'CADASTRO_SUCESSO'"
+						class="alert alert-success">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						Cadastro realizado com sucesso!
+					</div>
+					<div th:if="${msg} and ${msg} == 'CADASTRO_ERRO'"
+						class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<h4>Ocorreu erro ao cadastrar!</h4>
+					</div>
+					<form th:action="@{/categoria}" method="post"
+						th:object="${novaCategoria}" class="form-inline">
+						<h5>Nova categoria:</h5>
+						<div class="form-group mx-sm-3 mb-2">
+							<input type="text" name="nome" class="form-control"
+								th:field="*{nome}" />
+						</div>
+						<br />
+						<button type="submit" class="btn btn-primary mb-2">Cadastrar</button>
+					</form>
+					<br>
+
+					<table class="table">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">Categorias</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="categoria : ${categorias}">
+								<td th:text="${categoria.nome}"></td>
+							</tr>
+						</tbody>
+					</table>
+					<!-- <ul th:each="categoria : ${categorias}">
+						<li><label th:text="${categoria.nome}"></label></li>
+					</ul> -->
+				</div>
+			</div>
+		</section>
+		<div th:unless="${session.usuarioLogado}">
+			<h1>Por gentileza realize o Login</h1>
+		</div>
+
+		<div th:replace="fragmentos/fragmentos :: rodape"></div>
+	</div>
+</body>
+</html>

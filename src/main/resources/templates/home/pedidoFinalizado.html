@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Magic Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+<!-- bootstrap -->
+
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{/bootstrap/css/bootstrap-responsive.min.css}">
+<link rel="stylesheet" th:href="@{/themes/css/bootstrappage.css}">
+
+<!-- global styles -->
+<link rel="stylesheet" th:href="@{/themes/css/flexslider.css}">
+<link rel="stylesheet" th:href="@{/themes/css/main.css}">
+
+<!-- scripts -->
+<script th:src="@{/themes/js/jquery-1.7.2.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/themes/js/superfish.js}"></script>
+<script th:src="@{/themes/js/jquery.scrolltotop.js}"></script>
+<script th:src="@{/js/magicStore.js}"></script>
+<!--[if lt IE 9]>			
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="themes/js/respond.min.js"></script>
+		<![endif]-->
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+	<div id="wrapper" class="container">
+		<section class="header_text sub">
+			<h4>
+				<span>Check Out</span>
+			</h4>
+		</section>
+		<section class="main-content">
+			<h3>Obrigado pela sua compra!</h3>
+			<h4>
+				<label th:text="'O número do seu pedido é: ' + ${codigoPedido}"></label>
+			</h4>
+		</section>
+		<div th:replace="fragmentos/fragmentos :: rodape"></div>
+	</div>
+</body>
+</html>

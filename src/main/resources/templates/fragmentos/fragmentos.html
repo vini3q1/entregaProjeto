@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Magic Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{/bootstrap/css/bootstrap-responsive.min.css}">
+<link rel="stylesheet" th:href="@{/themes/css/bootstrappage.css}">
+
+<!-- global styles -->
+<link rel="stylesheet" th:href="@{/themes/css/flexslider.css}">
+<link rel="stylesheet" th:href="@{/themes/css/main.css}">
+
+<!-- scripts -->
+<script th:src="@{/themes/js/jquery-1.7.2.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/themes/js/superfish.js}"></script>
+<script th:src="@{/themes/js/jquery.scrolltotop.js}"></script>
+<script th:src="@{/js/magicStore.js}"></script>
+
+</head>
+<body> <header th:fragment="cabecalho">
+	<div id="top-bar" class="container">
+		<div class="row">
+			<div class="span12">
+			<a th:href="@{/}" class="logo pull-left"><img
+					th:src="@{/themes/images/magic_store.jpg}" class="site_logo" alt=""></a>
+				<input type="hidden" id="sessionID" th:value="${session.sessionID}" />
+				<div class="account pull-right">
+					<form id="logout" th:action="@{/logout}" method="post"></form>
+					<div th:if="${session.usuarioLogado}">
+						<input type="hidden" id="idUsuario"
+							th:value="${session.usuarioLogado.id}" />
+					</div>
+					<ul class="user-menu">
+						<li th:if="${session.usuarioLogado}"><a
+							th:href="@{/carrinho/cart/(idSessao = ${session.sessionID}, logado = true, idUsuario = ${session.usuarioLogado.id})}">Seu
+								carrinho</a></li>
+
+						<li th:if="${session.usuarioLogado}"><a
+							th:href="@{/minhaConta(idUsuario = ${session.usuarioLogado.id})}">Minha
+								conta</a></li>
+						<li
+							th:if="${session.usuarioLogado} and ${session.usuarioLogado.permissao.nome == 'ROLE_ADMIN'}"><a
+							th:href="@{/administracao}">Administração</a></li>
+						<li th:if="${session.usuarioLogado}"><button form="logout"
+								type="submit" class="btn btn-secondary">Sair</button></li>
+
+						<li th:unless="${session.usuarioLogado}"><a
+							th:href="@{/carrinho/cart/(idSessao = ${session.sessionID}, logado = false, idUsuario = 0)}">Seu
+								carrinho</a></li>
+						<li th:unless="${session.usuarioLogado}"><a
+							th:href="@{/login}">Login</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="wrapper" class="container">
+		<section class="navbar main-menu">
+			<div class="navbar-inner main-menu">
+				<nav id="menu" class="pull-right">
+					<ul>
+						<li><a th:href="@{/}">Home</a></li>
+						<li><a th:href="@{/categoria/all}">Categorias</a></li>
+						<li th:if="${session.usuarioLogado}"><a
+							th:href="@{/pedido/(idUsuario = ${session.usuarioLogado.id})}">Acompanhe
+								seu pedido</a></li>
+						<li><a th:href="@{/contato}">Contato</a></li>
+					</ul>
+				</nav>
+			</div>
+		</section>
+	</div>
+</header> <footer th:fragment="rodape">
+	<section id="footer-bar">
+		<div class="row">
+			<div class="span3">
+				<h4>Navegação</h4>
+				<ul class="nav">
+					<li><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/categoria/all}">Categoria</a></li>
+					<li><a th:href="@{/contato}">Contato</a></li>
+					<li><a th:href="@{/login}">Login</a></li>
+				</ul>
+			</div>
+			<div class="span4">
+			</div>
+			<div class="span5">
+				<h3>MAGIC STORE</h3>
+				<!-- <img src="themes/images/magic_store.jpg" class="site_logo" alt=""> -->
+				<p>O seu e-commerce de roupas.</p>
+				<br /> <span class="social_icons"> <a class="facebook"
+					href="#">Facebook</a> <a class="twitter" href="#">Twitter</a> <a
+					class="skype" href="#">Skype</a> <a class="vimeo" href="#">Vimeo</a>
+				</span>
+			</div>
+		</div>
+	</section>
+
+	<section id="copyright">
+		<span>Copyright 2021 Magic Store - Todos direitos reservados.</span>
+	</section>
+</footer> <script th:src="@{/themes/js/common.js}"></script> <script
+	th:src="@{/themes/js/jquery.flexslider-min.js}"></script> <script
+	type="text/javascript">
+		$(function() {
+			$(document).ready(function() {
+				$('.flexslider').flexslider({
+					animation : "fade",
+					slideshowSpeed : 4000,
+					animationSpeed : 600,
+					controlNav : false,
+					directionNav : true,
+					controlsContainer : ".flex-container" // the container that holds the flexslider
+				});
+			});
+		});
+	</script>
+</body>
+</html>
