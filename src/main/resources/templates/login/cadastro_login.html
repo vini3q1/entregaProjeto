@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Magic Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+<!-- bootstrap -->
+
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{/bootstrap/css/bootstrap-responsive.min.css}">
+<link rel="stylesheet" th:href="@{/themes/css/bootstrappage.css}">
+
+<!-- global styles -->
+<link rel="stylesheet" th:href="@{/themes/css/flexslider.css}">
+<link rel="stylesheet" th:href="@{/themes/css/main.css}">
+
+<!-- scripts -->
+<script th:src="@{/themes/js/jquery-1.7.2.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/themes/js/superfish.js}"></script>
+<script th:src="@{/themes/js/jquery.scrolltotop.js}"></script>
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+	<div id="wrapper" class="container">
+	<div th:if="${msg} and ${msg} == 'CADASTRO_SUCESSO'" class="alert alert-success">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+    	Cadastro realizado com sucesso!
+	</div>
+	<div th:if="${msg} and ${msg} == 'CADASTRO_ERRO'" class="alert alert-error">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+    	<h4>Ocorreu erro ao cadastrar!</h4>
+	</div>
+	<section class="header_text sub">
+		<h4>
+			<span>Login ou Cadastro</span>
+		</h4>
+	</section>
+	<section class="main-content">
+		<div class="row">
+			<div class="span5">
+				<h4 class="title">
+					<span class="text"><strong>Login</strong></span>
+				</h4>
+				<form id="loginUsuario" action="login" method="post"
+					th:object="${login}">
+					<input type="hidden" name="next" value="/">
+					<fieldset>
+						<div class="control-group">
+							<label class="control-label">E-mail</label>
+							<div class="controls">
+								<input type="email" th:field="*{email}"
+									placeholder="Digite seu e-mail" name="email"
+									class="input-xlarge">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Senha</label>
+							<div class="controls">
+								<input type="password" th:field="*{senha}"
+									placeholder="Digite sua senha" name="senha"
+									class="input-xlarge">
+							</div>
+						</div>
+						<div class="control-group">
+							<input tabindex="3" class="btn btn-inverse large" type="submit"
+								value="Entrar">
+							<hr>
+						</div>
+						<a th:href="@{/reset/senha}">Esqueci minha senha</a>
+					</fieldset>
+				</form>
+			</div>
+			<div class="span7">
+				<h4 class="title">
+					<span class="text"><strong>Cadastro</strong> DE CLIENTE</span>
+				</h4>
+				<!-- <form action="${contextPath}/usuario" method="post" class="form-stacked"> -->
+				<form id="cadastroUsuario" class="form-stacked" action=usuario
+					method="post" th:object="${usuario}">
+					<fieldset>
+						<div class="control-group">
+							<label class="control-label">Nome completo</label>
+							<div class="controls">
+								<input name="nome" type="text" th:field="*{nome}"
+									placeholder="Digite seu nome" class="input-xlarge" required="required">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">E-mail</label>
+							<div class="controls">
+								<input name="email" type="email" th:field="*{email}"
+									placeholder="Digite seu e-mail" class="input-xlarge" required="required">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Senha</label>
+							<div class="controls">
+								<input name="senha" type="password" th:field="*{senha}"
+									placeholder="Digite sua senha" class="input-xlarge" required="required">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">CPF</label>
+							<div class="controls">
+								<input name="cpf" type="text" th:field="*{cpf}"
+									placeholder="Digite seu cpf" class="input-xlarge" pattern="[0-9]+$" maxlength="11" required="required">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">RG</label>
+							<div class="controls">
+								<input name="rg" type="text" th:field="*{rg}"
+									placeholder="Digite seu rg" class="input-xlarge" pattern="[0-9]+$" maxlength="9" required="required">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Logradouro</label>
+							<div class="controls">
+								<input name="logradouro" type="text" th:field="*{logradouro}"
+									placeholder="Av.: , Rua..." class="input-xlarge" required="required">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Bairro</label>
+							<div class="controls">
+								<input name="bairro" type="text" th:field="*{bairro}"
+									placeholder="Digite o bairro" class="input-xlarge" required="required">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Cidade</label>
+							<div class="controls">
+								<input name="cidade" type="text" th:field="*{cidade}"
+									placeholder="Digite a cidade" class="input-xlarge" required="required">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Estado</label>
+							<div class="controls">
+								<input name="estado" type="text" th:field="*{estado}"
+									placeholder="Digite o estado" class="input-xlarge" required="required">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Número</label>
+							<div class="controls">
+								<input name="numero" type="text" th:field="*{numero}"
+									placeholder="Digite o número do local" class="input-xlarge" required="required">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">CEP</label>
+							<div class="controls">
+								<input name="cep" type="text" th:field="*{cep}"
+									placeholder="Digite o CEP" class="input-xlarge" required="required">
+							</div>
+						</div>
+						<hr>
+						<div class="actions">
+							<input tabindex="9" class="btn btn-inverse large" type="submit"
+								value="Criar sua conta">
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</section>
+	<!-- </div> -->
+	<div th:replace="fragmentos/fragmentos :: rodape"></div>
+	</div>
+</body>
+</html>

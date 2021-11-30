@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Magic Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+<!-- bootstrap -->
+
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{/bootstrap/css/bootstrap-responsive.min.css}">
+<link rel="stylesheet" th:href="@{/themes/css/bootstrappage.css}">
+
+<!-- global styles -->
+<link rel="stylesheet" th:href="@{/themes/css/flexslider.css}">
+<link rel="stylesheet" th:href="@{/themes/css/main.css}">
+
+<!-- scripts -->
+<script th:src="@{/themes/js/jquery-1.7.2.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/themes/js/superfish.js}"></script>
+<script th:src="@{/themes/js/jquery.scrolltotop.js}"></script>
+<script th:src="@{/js/magicStore.js}"></script>
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+	<div id="wrapper" class="container">
+		<!-- <section class="homepage-slider" id="home-slider">
+			<div class="flexslider">
+				<ul class="slides">
+					<li><img th:src="@{/themes/images/carousel/banner-1.jpg}"
+						alt="" /></li>
+					<li><img th:src="@{/themes/images/carousel/banner-2.jpg}"
+						alt="" />
+						<div class="intro">
+							<h1>Queima de estoque</h1>
+							<p>
+								<span>Com 50% de desconto</span>
+							</p>
+						</div></li>
+				</ul>
+			</div>
+		</section> -->
+		<section class="header_text">
+			<div class="flexslider">
+				<ul class="slides">
+					<li><img th:src="@{/themes/images/carousel/banner-1.jpg}"
+						alt="" /></li>
+					<li><img th:src="@{/themes/images/carousel/banner-2.jpg}"
+						alt="" />
+						<div class="intro">
+							<h1>Queima de estoque</h1>
+							<p>
+								<span>Com 50% de desconto</span>
+							</p>
+						</div></li>
+				</ul>
+			</div>
+			Confira os melhores modelos, com os melhores preços na <br />Magic
+			Store.
+		</section>
+		<section class="main-content">
+			<div class="row">
+				<div class="span12">
+					<div class="row">
+						<div class="span12">
+							<h4 class="title">
+								<span class="pull-left"><span class="text"><span
+										class="line">Nossos <strong>Produtos</strong></span></span></span> <span
+									class="pull-right"> <a class="left button"
+									href="#myCarousel" data-slide="prev"></a><a
+									class="right button" href="#myCarousel" data-slide="next"></a>
+								</span>
+							</h4>
+							<div id="myCarousel" class="myCarousel carousel slide">
+								<div class="carousel-inner">
+									<div class="active item" >
+										<ul class="thumbnails" >
+											<li class="span3" th:each="produtos : ${produtosIndexPg1}">
+												<div class="product-box">
+													<span class="sale_tag"></span>
+													<p>
+														<img
+														th:src="@{/themes/images/} + ${produtos.imagem}"
+															alt="" style="width: 200px"/>
+													</p>
+													<label th:text="${produtos.nome}"></label>
+													<p class="price" th:text="'R$ ' + ${produtos.valor}"></p>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="item">
+										<ul class="thumbnails">
+										<li class="span3" th:each="produtos : ${produtosIndexPg2}">
+												<div class="product-box">
+													<span class="sale_tag"></span>
+													<p>
+														<img
+														th:src="@{/themes/images/} + ${produtos.imagem}"
+															alt="" style="width: 200px"/>
+													</p>
+													<label th:text="${produtos.nome}"></label>
+													<p class="price" th:text="'R$ ' + ${produtos.valor}"></p>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="span12">
+						</div>
+					</div>
+					<div class="row feature_box">
+						<div class="span4">
+							<div class="service">
+								<div class="responsive">
+									<img th:src="@{/themes/images/feature_img_2.png}" alt="" />
+									<h4>
+										DESIGN <strong>MODERNO</strong>
+									</h4>
+									<p>Contamos com uma ótima plataforma de e-commerce para sua
+										melhor experiência para comprar sua nova roupa.</p>
+								</div>
+							</div>
+						</div>
+						<div class="span4">
+							<div class="service">
+								<div class="customize">
+									<img th:src="@{/themes/images/feature_img_1.png}" alt="" />
+									<h4>
+										<strong>ENVIOS</strong>
+									</h4>
+									<p>Confira nossas condições de frete.</p>
+								</div>
+							</div>
+						</div>
+						<div class="span4">
+							<div class="service">
+								<div class="support">
+									<img th:src="@{/themes/images/feature_img_3.png}" alt="" />
+									<h4>
+										SUPORTE <strong>24/7</strong>
+									</h4>
+									<p>Teve algum problema com o seu pedido? Entre em contato
+										conosco, ficaremos felizes em atendê-lo.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div th:replace="fragmentos/fragmentos :: rodape"></div>
+	</div>
+</body>
+</html>

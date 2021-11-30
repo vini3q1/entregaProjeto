@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Magic Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+<!-- bootstrap -->
+
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{/bootstrap/css/bootstrap-responsive.min.css}">
+<link rel="stylesheet" th:href="@{/themes/css/bootstrappage.css}">
+
+<!-- global styles -->
+<link rel="stylesheet" th:href="@{/themes/css/flexslider.css}">
+<link rel="stylesheet" th:href="@{/themes/css/main.css}">
+
+<!-- scripts -->
+<script th:src="@{/themes/js/jquery-1.7.2.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/themes/js/superfish.js}"></script>
+<script th:src="@{/themes/js/jquery.scrolltotop.js}"></script>
+<script th:src="@{/js/magicStore.js}"></script>
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+	<div id="wrapper" class="container">
+		<section class="header_text sub">
+			<h4>
+				<span>Produtos</span>
+			</h4>
+		</section>
+		<section class="main-content">
+			<div class="row">
+				<div class="span3 col">
+					<div class="block">
+						<ul class="nav nav-list">
+							<li class="nav-header">CATEGORIAS</li>
+							<li th:each="categoria : ${categorias}"><a
+								th:href="@{/produto/lista/{id}(id = ${categoria.id})}"> <label
+									th:text="${categoria.nome}"></label></a></li>
+						</ul>
+						<br />
+					</div>
+				</div>
+				<div class="span9">
+					<ul class="thumbnails listing-products">
+						<li class="span3" th:each="produto : ${produtos}">
+							<form id="carrinhoCompras" th:action="@{/carrinho}" method="post">
+								<div class="product-box" style="width: 300px; height: 400px">
+									<input type=hidden name="idProduto" th:value="${produto.id}"></input>
+									<span class="sale_tag"></span><img alt=""
+										th:src="@{/themes/images/} + ${produto.imagem}" style="width: 200px"><br />
+									<label th:text="${produto.nome}" class="category"></label> <br />
+									<input type=hidden name="valorCarrinho"
+										th:value="${produto.valor}"></input>
+									<p class="price" th:text="'R$ ' + ${produto.valor}"></p>
+									<input name="quantidade" type="number" value="1" />
+									<button type="submit" class="btn btn-light">Adicionar ao carrinho</button> 
+								</div>
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<div th:replace="fragmentos/fragmentos :: rodape"></div>
+	</div>
+</body>
+</html>
